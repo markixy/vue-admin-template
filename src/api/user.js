@@ -1,24 +1,29 @@
+import qs from 'qs'
 import request from '@/utils/request'
+
+const urlPrefix = '/auth'
 
 export function login(data) {
   return request({
-    url: '/vue-admin-template/user/login',
+    url: urlPrefix + '/login',
     method: 'post',
-    data
+    data: qs.stringify(data) // 表单传参
+    // headers: {
+    //   'Content-Type': 'application/x-www-form-urlencoded'
+    // }
   })
 }
 
-export function getInfo(token) {
+export function getInfo() {
   return request({
-    url: '/vue-admin-template/user/info',
-    method: 'get',
-    params: { token }
+    url: urlPrefix + '/current/principal',
+    method: 'get'
   })
 }
 
 export function logout() {
   return request({
-    url: '/vue-admin-template/user/logout',
+    url: urlPrefix + '/logout',
     method: 'post'
   })
 }
